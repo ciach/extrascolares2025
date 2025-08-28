@@ -9,6 +9,204 @@ import { Download, Upload, Printer, Plus, Trash2, AlertTriangle, X } from "lucid
 // — Export/Import your plan as JSON (local-only)
 // — Prints nicely
 
+// ——— i18n (minimal, inline, module scope so ActivityCard can use) ———
+type Lang = 'en' | 'es' | 'ca';
+const I18N: Record<Lang, Record<string, string>> = {
+  en: {
+    title: 'Activities Planner',
+    addKid: 'Add Kid',
+    add: 'Add',
+    namePlaceholder: 'Name',
+    allKids: 'All Kids',
+    middayAndAfternoon: 'Midday & Afternoon',
+    middayOnly: 'Midday Only',
+    afternoonOnly: 'Afternoon Only',
+    allDays: 'All Days',
+    onlyAssigned: 'Only assigned activities',
+    onlyAssignedSuffixForKid: 'for this kid',
+    normalizedToggle: 'Show monthly normalized prices',
+    materialsInfo: 'Materials fees are charged once per kid per activity',
+    clearAll: 'Clear All',
+    clearAllConfirm: 'Are you sure you want to clear all data?',
+    import: 'Import Plan',
+    importInvalid: 'Invalid import data',
+    export: 'Export Plan',
+    print: 'Print',
+    conflictsTitle: 'Conflicts',
+    remove: 'Remove',
+    filters: 'Filters',
+    financialView: 'Financial view',
+    schedule: 'Schedule',
+    day: 'Day',
+    midday: 'Midday',
+    afternoon: 'Afternoon',
+    noActivities: 'No activities',
+    financialSummary: 'Financial summary',
+    addKidsHint: 'Add kids and assign activities to see the summary',
+    kid: 'Kid',
+    monthlyNorm: 'Monthly (normalized)',
+    termTotal: 'Term total',
+    materialsOnce: 'Materials (once)',
+    perMonthShort: 'mo',
+    perTermShort: 'term',
+    total: 'Total',
+    note: 'Note: Monthly normalized divides per-term prices by ~3 months/term.',
+    legendGrades: 'Grades:',
+    legendText: 'I3–I5 (Infantil) and 1st–6th (Primary).',
+    andMore: '...and {count} more',
+    monday: 'Monday',
+    tuesday: 'Tuesday',
+    wednesday: 'Wednesday',
+    thursday: 'Thursday',
+    friday: 'Friday',
+    timeMiddaySlot: 'Midday slot',
+    timeAfternoonSlot: 'Afternoon slot',
+    plusMaterialsOnce: '+ {fee}€ materials (once)',
+    noKidsAssigned: 'No kids assigned yet',
+    removeKidTitle: 'Remove {name}',
+    addKidsFirst: 'Add kids first',
+    assignKidTitle: 'Assign kid',
+    assignKid: '+ Assign kid',
+    allKidsAssigned: 'All kids assigned',
+    notEligibleTitle: 'Not eligible: {kidGrade} vs {activityGrades}',
+    notEligibleShort: 'not eligible',
+    notEligibleAlert: '{kidName} ({kidGrade}) is not eligible for {activityName} ({activityGrades}).',
+    slot: 'slot',
+  },
+  es: {
+    title: 'Planificador de Actividades',
+    addKid: 'Agregar Niño',
+    add: 'Agregar',
+    namePlaceholder: 'Nombre',
+    allKids: 'Todos los Niños',
+    middayAndAfternoon: 'Mediodía y Tarde',
+    middayOnly: 'Solo Mediodía',
+    afternoonOnly: 'Solo Tarde',
+    allDays: 'Todos los Días',
+    onlyAssigned: 'Solo actividades asignadas',
+    onlyAssignedSuffixForKid: 'para este niño',
+    normalizedToggle: 'Mostrar precios normalizados mensuales',
+    materialsInfo: 'Los costos de materiales se cobran una vez por niño por actividad',
+    clearAll: 'Borrar Todo',
+    clearAllConfirm: '¿Estás seguro de que deseas borrar todos los datos?',
+    import: 'Importar Plan',
+    importInvalid: 'Datos de importación inválidos',
+    export: 'Exportar Plan',
+    print: 'Imprimir',
+    conflictsTitle: 'Conflictos',
+    remove: 'Eliminar',
+    filters: 'Filtros',
+    financialView: 'Vista financiera',
+    schedule: 'Horario',
+    day: 'Día',
+    midday: 'Mediodía',
+    afternoon: 'Tarde',
+    noActivities: 'Sin actividades',
+    financialSummary: 'Resumen financiero',
+    addKidsHint: 'Añade niños y asigna actividades para ver el resumen',
+    kid: 'Niño',
+    monthlyNorm: 'Mensual (normalizado)',
+    termTotal: 'Total por trimestre',
+    materialsOnce: 'Materiales (una vez)',
+    perMonthShort: 'mes',
+    perTermShort: 'trimestre',
+    total: 'Total',
+    note: 'Nota: El mensual normalizado divide los precios por trimestre entre ~3 meses.',
+    legendGrades: 'Cursos:',
+    legendText: 'I3–I5 (Infantil) y 1º–6º (Primaria).',
+    andMore: '...y {count} más',
+    monday: 'Lunes',
+    tuesday: 'Martes',
+    wednesday: 'Miércoles',
+    thursday: 'Jueves',
+    friday: 'Viernes',
+    timeMiddaySlot: 'Turno de mediodía',
+    timeAfternoonSlot: 'Turno de tarde',
+    plusMaterialsOnce: '+ {fee}€ materiales (una vez)',
+    noKidsAssigned: 'Sin niños asignados',
+    removeKidTitle: 'Quitar a {name}',
+    addKidsFirst: 'Añade niños primero',
+    assignKidTitle: 'Asignar niño',
+    assignKid: '+ Asignar niño',
+    allKidsAssigned: 'Todos los niños asignados',
+    notEligibleTitle: 'No elegible: {kidGrade} vs {activityGrades}',
+    notEligibleShort: 'no elegible',
+    notEligibleAlert: '{kidName} ({kidGrade}) no es elegible para {activityName} ({activityGrades}).',
+    slot: 'turno',
+  },
+  ca: {
+    title: "Planificador d'Activitats",
+    addKid: 'Afegir Infant',
+    add: 'Afegir',
+    namePlaceholder: 'Nom',
+    allKids: 'Tots els Infants',
+    middayAndAfternoon: 'Migdia i Tarda',
+    middayOnly: 'Només Migdia',
+    afternoonOnly: 'Només Tarda',
+    allDays: 'Tots els Dies',
+    onlyAssigned: 'Només activitats assignades',
+    onlyAssignedSuffixForKid: 'per a aquest infant',
+    normalizedToggle: 'Mostrar preus normalitzats mensuals',
+    materialsInfo: "Els costos de materials es cobren una vegada per infant per activitat",
+    clearAll: 'Esborrar Tot',
+    clearAllConfirm: 'Esteu segur que voleu esborrar totes les dades?',
+    import: 'Importar Pla',
+    importInvalid: 'Dades d\'importació invàlides',
+    export: 'Exportar Pla',
+    print: 'Imprimir',
+    conflictsTitle: 'Conflictes',
+    remove: 'Eliminar',
+    filters: 'Filtres',
+    financialView: 'Vista financera',
+    schedule: 'Horari',
+    day: 'Dia',
+    midday: 'Migdia',
+    afternoon: 'Tarda',
+    noActivities: 'Sense activitats',
+    financialSummary: 'Resum financer',
+    addKidsHint: 'Afegeix infants i assigna activitats per veure el resum',
+    kid: 'Infant',
+    monthlyNorm: 'Mensual (normalitzat)',
+    termTotal: 'Total per trimestre',
+    materialsOnce: 'Materials (una vegada)',
+    perMonthShort: 'mes',
+    perTermShort: 'trimestre',
+    total: 'Total',
+    note: 'Nota: El mensual normalitzat divideix els preus trimestrals entre ~3 mesos.',
+    legendGrades: 'Cursos:',
+    legendText: 'I3–I5 (Infantil) i 1r–6è (Primària).',
+    andMore: '...i {count} més',
+    monday: 'Dilluns',
+    tuesday: 'Dimarts',
+    wednesday: 'Dimecres',
+    thursday: 'Dijous',
+    friday: 'Divendres',
+    timeMiddaySlot: 'Torn de migdia',
+    timeAfternoonSlot: 'Torn de tarda',
+    plusMaterialsOnce: '+ {fee}€ materials (una vegada)',
+    noKidsAssigned: 'Sense infants assignats',
+    removeKidTitle: 'Treure {name}',
+    addKidsFirst: 'Afegeix infants primer',
+    assignKidTitle: 'Assignar infant',
+    assignKid: '+ Assignar infant',
+    allKidsAssigned: 'Tots els infants assignats',
+    notEligibleTitle: 'No elegible: {kidGrade} vs {activityGrades}',
+    notEligibleShort: 'no elegible',
+    notEligibleAlert: '{kidName} ({kidGrade}) no és elegible per a {activityName} ({activityGrades}).',
+    slot: 'torn',
+  },
+};
+
+const t = (lang: Lang, key: string, vars?: Record<string, string | number>) => {
+  let str = I18N[lang][key] ?? key;
+  if (vars) {
+    for (const [k, v] of Object.entries(vars)) {
+      str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));
+    }
+  }
+  return str;
+};
+
 /**
  * Data models
  */
@@ -321,6 +519,8 @@ type Kid = {
   const [filterSlot, setFilterSlot] = useState<Slot | "both">("both");
   const [filterDay, setFilterDay] = useState<Day | "all">("all");
   const [onlyAssignedForKid, setOnlyAssignedForKid] = useState(false);
+  const [lang, setLang] = useState<Lang>('en');
+
 
   // Kid form state
   const [newKidName, setNewKidName] = useState("");
@@ -375,7 +575,7 @@ type Kid = {
         const activity = ACTIVITIES.find(a => a.id === activityId);
         const kid = p.kids.find(k => k.id === kidId) as Kid | undefined;
         if (activity && kid && !isKidEligibleFor(activity, kid)) {
-          alert(`${kid.name} (${kid.grade}) is not eligible for ${activity.name} (${activity.grades}).`);
+          alert(t(lang, 'notEligibleAlert', { kidName: kid.name, kidGrade: kid.grade, activityName: activity.name, activityGrades: activity.grades }));
           return p; // no change
         }
       }
@@ -401,14 +601,14 @@ type Kid = {
         const data = JSON.parse(String(reader.result)) as PlanState;
         setPlan(data);
       } catch (e) {
-        alert("Invalid plan file");
+        alert(t(lang, 'importInvalid'));
       }
     };
     reader.readAsText(file);
   };
 
   const clearAll = () => {
-    if (!confirm("Clear all kids & assignments?")) return;
+    if (!confirm(t(lang, 'clearAllConfirm'))) return;
     setPlan({ kids: [], assignments: {} });
   };
 
@@ -444,16 +644,21 @@ type Kid = {
       {/* Header */}
       <header className="sticky top-0 z-20 backdrop-blur bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-700">
         <div className="w-full px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">gatperlleure Activities Planner</h1>
-          <div className="flex gap-2">
+          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">{t(lang, 'title')}</h1>
+          <div className="flex gap-2 items-center">
+            <select value={lang} onChange={e => setLang(e.target.value as Lang)} className="rounded-xl border px-2 py-1 text-sm bg-white dark:bg-slate-800 dark:border-slate-700">
+              <option value="en">EN</option>
+              <option value="es">ES</option>
+              <option value="ca">CA</option>
+            </select>
             <button onClick={() => window.print()} className="inline-flex items-center gap-2 px-3 py-2 rounded-2xl border bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-700">
-              <Printer className="w-4 h-4"/> Print
+              <Printer className="w-4 h-4"/> {t(lang, 'print')}
             </button>
             <button onClick={exportPlan} className="inline-flex items-center gap-2 px-3 py-2 rounded-2xl border bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-700">
-              <Download className="w-4 h-4"/> Export
+              <Download className="w-4 h-4"/> {t(lang, 'export')}
             </button>
             <label className="inline-flex items-center gap-2 px-3 py-2 rounded-2xl border bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-700 cursor-pointer">
-              <Upload className="w-4 h-4"/> Import
+              <Upload className="w-4 h-4"/> {t(lang, 'import')}
               <input type="file" accept="application/json" className="hidden" onChange={e => e.target.files && importPlan(e.target.files[0])} />
             </label>
           </div>
@@ -465,9 +670,9 @@ type Kid = {
         <section className="grid md:grid-cols-3 gap-4 mb-6">
           {/* Add Kid */}
           <div className="rounded-2xl border bg-white dark:bg-slate-800 dark:border-slate-700 p-4 shadow-sm">
-            <h2 className="font-medium mb-3">Add kid</h2>
+            <h2 className="font-medium mb-3">{t(lang, 'addKid')}</h2>
             <div className="flex items-center gap-2 flex-wrap">
-              <input value={newKidName} onChange={e => setNewKidName(e.target.value)} placeholder="Name" className="flex-1 rounded-xl border px-3 py-2 bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400" />
+              <input value={newKidName} onChange={e => setNewKidName(e.target.value)} placeholder={t(lang, 'namePlaceholder')} className="flex-1 rounded-xl border px-3 py-2 bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-400" />
               <input type="color" value={newKidColor} onChange={e => setNewKidColor(e.target.value)} className="h-10 w-12 rounded-xl border p-1 dark:border-slate-700" />
               <select value={newKidGrade} onChange={e => setNewKidGrade(e.target.value as GradeLevel)} className="rounded-xl border px-3 py-2 bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 text-sm">
                 <option value="I3">I3</option>
@@ -480,7 +685,7 @@ type Kid = {
                 <option value="5th">5th</option>
                 <option value="6th">6th</option>
               </select>
-              <button onClick={addKid} className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-400"><Plus className="w-4 h-4"/>Add</button>
+              <button onClick={addKid} className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-400"><Plus className="w-4 h-4"/>{t(lang, 'add')}</button>
             </div>
             {plan.kids.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
@@ -488,7 +693,7 @@ type Kid = {
                   <span key={k.id} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border shadow-sm dark:border-slate-700">
                     <span className="w-3 h-3 rounded-full" style={{ backgroundColor: k.color }} /> {k.name}
                     <span className="text-xs text-slate-500 dark:text-slate-300">({k.grade})</span>
-                    <button onClick={() => removeKid(k.id)} className="ml-1 text-slate-400 hover:text-red-600 dark:text-slate-300 dark:hover:text-red-400" title="Remove"><X className="w-4 h-4"/></button>
+                    <button onClick={() => removeKid(k.id)} className="ml-1 text-slate-400 hover:text-red-600 dark:text-slate-300 dark:hover:text-red-400" title={t(lang, 'remove')}><X className="w-4 h-4"/></button>
                   </span>
                 ))}
               </div>
@@ -497,22 +702,22 @@ type Kid = {
 
           {/* Filters */}
           <div className="rounded-2xl border bg-white dark:bg-slate-800 dark:border-slate-700 p-4 shadow-sm">
-            <h2 className="font-medium mb-3">Filters</h2>
+            <h2 className="font-medium mb-3">{t(lang, 'filters')}</h2>
             <div className="grid grid-cols-2 gap-2">
               <select value={filterKidId} onChange={e => setFilterKidId(e.target.value as any)} className="rounded-xl border px-3 py-2 bg-white text-slate-700 border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-300/70 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700 dark:focus:ring-slate-600/60">
-                <option value="all">All kids</option>
+                <option value="all">{t(lang, 'allKids')}</option>
                 {plan.kids.map(k => (
                   <option key={k.id} value={k.id}>{k.name}</option>
                 ))}
               </select>
               <select value={filterSlot} onChange={e => setFilterSlot(e.target.value as any)} className="rounded-xl border px-3 py-2 text-slate-700 bg-white border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-300/70 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700 dark:focus:ring-slate-600/60">
-                <option value="both">Midday &amp; Afternoon</option>
-                <option value="Midday">Midday only</option>
-                <option value="Afternoon">Afternoon only</option>
+                <option value="both">{t(lang, 'middayAndAfternoon')}</option>
+                <option value="Midday">{t(lang, 'middayOnly')}</option>
+                <option value="Afternoon">{t(lang, 'afternoonOnly')}</option>
               </select>
               <select value={filterDay} onChange={e => setFilterDay(e.target.value as any)} className="rounded-xl border px-3 py-2 col-span-2 text-slate-700 bg-white border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-300/70 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700 dark:focus:ring-slate-600/60">
-                <option value="all">All days</option>
-                {DAYS.map(d => <option key={d} value={d}>{d}</option>)}
+                <option value="all">{t(lang, 'allDays')}</option>
+                {DAYS.map(d => <option key={d} value={d}>{t(lang, d.toLowerCase() as any)}</option>)}
               </select>
               <label className="col-span-2 flex items-center gap-2 text-sm mt-1">
                 <input
@@ -520,21 +725,23 @@ type Kid = {
                   checked={onlyAssignedForKid}
                   onChange={e => setOnlyAssignedForKid(e.target.checked)}
                 />
-                <span>Show only activities with assignments {filterKidId !== "all" && "(for selected kid)"}</span>
+                <span>
+                  {t(lang, 'onlyAssigned')} {filterKidId !== "all" && t(lang, 'onlyAssignedSuffixForKid')}
+                </span>
               </label>
             </div>
           </div>
 
           {/* Finance toggle & housekeeping */}
           <div className="rounded-2xl border bg-white dark:bg-slate-800 dark:border-slate-700 p-4 shadow-sm">
-            <h2 className="font-medium mb-3">Financial view</h2>
+            <h2 className="font-medium mb-3">{t(lang, 'financialView')}</h2>
             <label className="flex items-center gap-2">
               <input type="checkbox" checked={normalizeMonthly} onChange={e => setNormalizeMonthly(e.target.checked)} />
-              <span>Show <b>normalized monthly</b> (term ÷ 3) alongside totals</span>
+              <span>{t(lang, 'normalizedToggle')}</span>
             </label>
-            <p className="text-sm text-slate-500 mt-2">Materials fees are counted once per kid per provider (e.g., English 40€, French 20€, Creative Art 12€).</p>
+            <p className="text-sm text-slate-500 mt-2">{t(lang, 'materialsInfo')}</p>
             <div className="mt-3">
-              <button onClick={clearAll} className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-200 text-slate-900 hover:bg-slate-300 border border-slate-300 dark:bg-slate-600 dark:text-slate-100 dark:hover:bg-slate-500 dark:border-slate-600"><Trash2 className="w-4 h-4"/> Clear all</button>
+              <button onClick={clearAll} className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-200 text-slate-900 hover:bg-slate-300 border border-slate-300 dark:bg-slate-600 dark:text-slate-100 dark:hover:bg-slate-500 dark:border-slate-600"><Trash2 className="w-4 h-4"/> {t(lang, 'clearAll')}</button>
             </div>
           </div>
         </section>
@@ -545,13 +752,13 @@ type Kid = {
             <div className="flex items-start gap-2">
               <AlertTriangle className="w-5 h-5 text-amber-600 mt-0.5"/>
               <div>
-                <h3 className="font-medium text-amber-800">Potential schedule conflicts</h3>
+                <h3 className="font-medium text-amber-800">{t(lang, 'conflictsTitle')}</h3>
                 <ul className="mt-2 text-sm text-amber-900 list-disc ml-5 space-y-1">
                   {conflicts.slice(0, 8).map((c, i) => (
-                    <li key={i}><b>{c.kidName}</b>: {c.day} {c.slot} — "{c.a.name}" vs "{c.b.name}" ({c.a.time || "slot"} / {c.b.time || "slot"})</li>
+                    <li key={i}><b>{c.kidName}</b>: {c.day} {c.slot} — "{c.a.name}" vs "{c.b.name}" ({c.a.time || t(lang, 'slot')} / {c.b.time || t(lang, 'slot')})</li>
                   ))}
                 </ul>
-                {conflicts.length > 8 && <p className="text-sm mt-1">…and {conflicts.length - 8} more.</p>}
+                {conflicts.length > 8 && <p className="text-sm mt-1">{t(lang, 'andMore', { count: conflicts.length - 8 })}</p>}
               </div>
             </div>
           </div>
@@ -560,7 +767,7 @@ type Kid = {
         {/* Schedule Table: Day / Midday / Afternoon */}
         <section>
           <div className="rounded-2xl border bg-white dark:bg-slate-800 dark:border-slate-700 p-4 shadow-sm">
-            <h2 className="text-lg font-semibold mb-4">Schedule</h2>
+            <h2 className="text-lg font-semibold mb-4">{t(lang, 'schedule')}</h2>
             <div className="overflow-x-auto">
               <table className="w-full table-fixed text-sm">
                 <colgroup>
@@ -570,26 +777,26 @@ type Kid = {
                 </colgroup>
                 <thead>
                   <tr className="text-left border-b">
-                    <th className="py-2 pr-2 w-28">Day</th>
-                    { (filterSlot === 'both' || filterSlot === 'Midday') && <th className="py-2 px-2 w-1/2">Midday</th> }
-                    { (filterSlot === 'both' || filterSlot === 'Afternoon') && <th className="py-2 px-2 w-1/2">Afternoon</th> }
+                    <th className="py-2 pr-2 w-28">{t(lang, 'day')}</th>
+                    { (filterSlot === 'both' || filterSlot === 'Midday') && <th className="py-2 px-2 w-1/2">{t(lang, 'midday')}</th> }
+                    { (filterSlot === 'both' || filterSlot === 'Afternoon') && <th className="py-2 px-2 w-1/2">{t(lang, 'afternoon')}</th> }
                   </tr>
                 </thead>
                 <tbody>
                   {DAYS.filter(d => filterDay === 'all' || d === filterDay).map(day => (
                     <tr key={day} className="align-top border-b last:border-0">
-                      <td className="py-3 pr-2 font-medium">{day}</td>
+                      <td className="py-3 pr-2 font-medium">{t(lang, day.toLowerCase() as any)}</td>
                       { (filterSlot === 'both' || filterSlot === 'Midday') && (
                         <td className="py-3 px-2 w-1/2">
                           <div className="space-y-3">
                             {byDaySlot[day]['Midday'].length === 0 && (
-                              <p className="text-slate-400">No activities</p>
+                              <p className="text-slate-400">{t(lang, 'noActivities')}</p>
                             )}
                             {byDaySlot[day]['Midday']
                               .slice()
                               .sort((a,b) => ((plan.assignments[b.id]?.length||0) - (plan.assignments[a.id]?.length||0)))
                               .map(act => (
-                                <ActivityCard key={act.id} activity={act} plan={plan} onToggle={toggleAssignment} />
+                                <ActivityCard key={act.id} activity={act} plan={plan} onToggle={toggleAssignment} lang={lang} />
                               ))}
                           </div>
                         </td>
@@ -598,13 +805,13 @@ type Kid = {
                         <td className="py-3 px-2 w-1/2">
                           <div className="space-y-3">
                             {byDaySlot[day]['Afternoon'].length === 0 && (
-                              <p className="text-slate-400">No activities</p>
+                              <p className="text-slate-400">{t(lang, 'noActivities')}</p>
                             )}
                             {byDaySlot[day]['Afternoon']
                               .slice()
                               .sort((a,b) => ((plan.assignments[b.id]?.length||0) - (plan.assignments[a.id]?.length||0)))
                               .map(act => (
-                                <ActivityCard key={act.id} activity={act} plan={plan} onToggle={toggleAssignment} />
+                                <ActivityCard key={act.id} activity={act} plan={plan} onToggle={toggleAssignment} lang={lang} />
                               ))}
                           </div>
                         </td>
@@ -620,18 +827,18 @@ type Kid = {
         {/* Financial Summary */}
         <section className="mt-8">
           <div className="rounded-2xl border bg-white dark:bg-slate-800 dark:border-slate-700 p-4 shadow-sm">
-            <h2 className="text-lg font-semibold mb-4">Financial summary</h2>
+            <h2 className="text-lg font-semibold mb-4">{t(lang, 'financialSummary')}</h2>
             {plan.kids.length === 0 ? (
-              <p className="text-slate-500">Add kids and assign activities to see a breakdown.</p>
+              <p className="text-slate-500">{t(lang, 'addKidsHint')}</p>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="text-left border-b">
-                      <th className="py-2 pr-2">Kid</th>
-                      <th className="py-2 px-2">Monthly (normalized)</th>
-                      <th className="py-2 px-2">Term total</th>
-                      <th className="py-2 px-2">Materials (one-time)</th>
+                      <th className="py-2 pr-2">{t(lang, 'kid')}</th>
+                      <th className="py-2 px-2">{t(lang, 'monthlyNorm')}</th>
+                      <th className="py-2 px-2">{t(lang, 'termTotal')}</th>
+                      <th className="py-2 px-2">{t(lang, 'materialsOnce')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -642,8 +849,8 @@ type Kid = {
                           <td className="py-2 pr-2">
                             <span className="inline-flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{ backgroundColor: k.color }} /> {k.name}</span>
                           </td>
-                          <td className="py-2 px-2">{normalizeMonthly ? `${row.monthly.toFixed(2)} € / mo` : <span className="text-slate-400">(toggle on)</span>}</td>
-                          <td className="py-2 px-2">{row.term.toFixed(2)} € / term</td>
+                          <td className="py-2 px-2">{normalizeMonthly ? `${row.monthly.toFixed(2)} € / ${t(lang, 'perMonthShort')}` : <span className="text-slate-400">(toggle on)</span>}</td>
+                          <td className="py-2 px-2">{row.term.toFixed(2)} € / {t(lang, 'perTermShort')}</td>
                           <td className="py-2 px-2">{row.materials.toFixed(2)} €</td>
                         </tr>
                       );
@@ -651,22 +858,22 @@ type Kid = {
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td className="py-2 pr-2 font-medium">Total</td>
-                      <td className="py-2 px-2 font-medium">{normalizeMonthly ? `${financials.totalMonthly.toFixed(2)} € / mo` : <span className="text-slate-400">(toggle on)</span>}</td>
-                      <td className="py-2 px-2 font-medium">{financials.totalTerm.toFixed(2)} € / term</td>
+                      <td className="py-2 pr-2 font-medium">{t(lang, 'total')}</td>
+                      <td className="py-2 px-2 font-medium">{normalizeMonthly ? `${financials.totalMonthly.toFixed(2)} € / ${t(lang, 'perMonthShort')}` : <span className="text-slate-400">(toggle on)</span>}</td>
+                      <td className="py-2 px-2 font-medium">{financials.totalTerm.toFixed(2)} € / {t(lang, 'perTermShort')}</td>
                       <td className="py-2 px-2 font-medium">{financials.totalMaterials.toFixed(2)} €</td>
                     </tr>
                   </tfoot>
                 </table>
               </div>
             )}
-            <p className="text-xs text-slate-500 mt-2">Note: For planning only. Term ≈ 3 months; normalized monthly = term ÷ 3. Psychomotricity is bundled at 75€/term for 1 day or 135€/term for 2 days per kid.</p>
+            <p className="text-xs text-slate-500 mt-2">{t(lang, 'note')}</p>
           </div>
         </section>
 
         {/* Legend */}
         <section className="mt-6 text-xs text-slate-500">
-          <p><b>Grades:</b> I3–I5 = preschool; 1st–6th = primary. Midday typically has two lunch turns (12:30–13:30 and 13:40–14:40). Times shown are representative; providers may assign exact turn.</p>
+          <p><b>{t(lang, 'legendGrades')}</b> {t(lang, 'legendText')}</p>
         </section>
       </main>
 
@@ -682,7 +889,7 @@ type Kid = {
   );
  }
 
- function ActivityCard({ activity, plan, onToggle }: { activity: Activity; plan: PlanState; onToggle: (activityId: string, kidId: string) => void }) {
+ function ActivityCard({ activity, plan, onToggle, lang }: { activity: Activity; plan: PlanState; onToggle: (activityId: string, kidId: string) => void; lang: Lang }) {
   const [open, setOpen] = useState(false);
   const assignedKids = plan.assignments[activity.id] || [];
   const assigned = plan.kids.filter(k => assignedKids.includes(k.id));
@@ -708,20 +915,22 @@ type Kid = {
     };
   }, [open]);
 
+  // Language is now passed as a prop from parent component
+
   return (
     <div className="rounded-xl border p-3 shadow-sm hover:shadow transition dark:border-slate-700">
       <div className="flex items-start justify-between gap-3">
         <div>
           <div className="font-medium">{activity.name}</div>
           <div className="text-xs text-slate-500 mt-0.5">{activity.grades}</div>
-          <div className="text-xs text-slate-500">{activity.time || (activity.slot === "Midday" ? "Midday slot" : "Afternoon slot")}</div>
+          <div className="text-xs text-slate-500">{activity.time || (activity.slot === "Midday" ? t(lang, 'timeMiddaySlot') : t(lang, 'timeAfternoonSlot'))}</div>
           {activity.provider && <div className="text-xs text-slate-500">{activity.provider}{activity.location ? ` · ${activity.location}` : ""}</div>}
           {activity.notes && <div className="text-xs text-slate-500 italic">{activity.notes}</div>}
         </div>
         <div className="text-right shrink-0">
-          <div className="text-sm font-semibold">{activity.price} € <span className="text-xs font-normal text-slate-500">/{activity.period === "month" ? "mo" : "term"}</span></div>
+          <div className="text-sm font-semibold">{activity.price} € <span className="text-xs font-normal text-slate-500">/{activity.period === "month" ? t(lang, 'perMonthShort') : t(lang, 'perTermShort')}</span></div>
           {activity.materialsFee && (
-            <div className="text-[11px] text-slate-500">+ materials {activity.materialsFee} € (once)</div>
+            <div className="text-[11px] text-slate-500">{t(lang, 'plusMaterialsOnce', { fee: activity.materialsFee })}</div>
           )}
         </div>
       </div>
@@ -729,7 +938,7 @@ type Kid = {
       {/* Kid assignment chips (assigned only) */}
       <div className="mt-3 flex flex-wrap gap-2 items-center">
         {assigned.length === 0 && (
-          <span className="text-xs text-slate-400">No kids assigned.</span>
+          <span className="text-xs text-slate-400">{t(lang, 'noKidsAssigned')}</span>
         )}
         {assigned.map(kid => (
           <span key={kid.id} className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border text-xs dark:border-slate-600" style={{ borderColor: kid.color }}>
@@ -737,7 +946,7 @@ type Kid = {
             {kid.name}
             <button
               className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 dark:text-slate-700 dark:bg-slate-100 dark:hover:bg-slate-200 dark:border-slate-300"
-              title={`Remove ${kid.name}`}
+              title={t(lang, 'removeKidTitle', { name: kid.name })}
               onClick={() => onToggle(activity.id, kid.id)}
             >
               <X className="w-3.5 h-3.5" />
@@ -751,15 +960,15 @@ type Kid = {
             className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-300 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-600"
             onClick={() => setOpen(v => !v)}
             disabled={plan.kids.length === 0}
-            title={plan.kids.length === 0 ? "Add kids first" : "Assign kid"}
+            title={plan.kids.length === 0 ? t(lang, 'addKidsFirst') : t(lang, 'assignKidTitle')}
             ref={buttonRef}
           >
-            + Assign kid
+            {t(lang, 'assignKid')}
           </button>
           {open && (
             <div ref={menuRef} className="absolute z-10 mt-1 w-40 rounded-lg border bg-white shadow-lg p-1 dark:bg-slate-800 dark:border-slate-600">
               {unassigned.length === 0 ? (
-                <div className="px-2 py-1 text-xs text-slate-500">All kids assigned</div>
+                <div className="px-2 py-1 text-xs text-slate-500">{t(lang, 'allKidsAssigned')}</div>
               ) : (
               unassigned.map(kid => {
                 const eligible = isKidEligibleFor(activity, kid);
@@ -773,10 +982,10 @@ type Kid = {
                     onClick={() => { if (eligible) { onToggle(activity.id, kid.id); setOpen(false); } }}
                     className={cls}
                     disabled={!eligible}
-                    title={eligible ? undefined : `Not eligible: ${kid.grade} vs ${activity.grades}`}
+                    title={eligible ? undefined : t(lang, 'notEligibleTitle', { kidGrade: kid.grade, activityGrades: activity.grades })}
                   >
                     <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: kid.color }} /> {kid.name}
-                    {!eligible && <span className="ml-1 text-[10px] text-slate-500">(not eligible)</span>}
+                    {!eligible && <span className="ml-1 text-[10px] text-slate-500">{t(lang, 'notEligibleShort')}</span>}
                   </button>
                 );
               })
