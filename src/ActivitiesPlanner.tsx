@@ -519,7 +519,7 @@ type Kid = {
   const [filterSlot, setFilterSlot] = useState<Slot | "both">("both");
   const [filterDay, setFilterDay] = useState<Day | "all">("all");
   const [onlyAssignedForKid, setOnlyAssignedForKid] = useState(false);
-  const [lang, setLang] = useState<Lang>('en');
+  const [lang, setLang] = useState<Lang>('es');
 
 
   // Kid form state
