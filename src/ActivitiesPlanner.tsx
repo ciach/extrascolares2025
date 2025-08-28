@@ -217,6 +217,9 @@ const t = (lang: Lang, key: string, vars?: Record<string, string | number>) => {
  type Activity = {
   id: string;
   name: string;
+  /** Optional localized names */
+  nameEs?: string;
+  nameCa?: string;
   day: Day;
   slot: Slot;
   /** Example: "12:30–13:30" or "16:30–17:45". If an activity spans two potential lunch turns, we mark both in notes. */
@@ -233,6 +236,13 @@ const t = (lang: Lang, key: string, vars?: Record<string, string | number>) => {
   /** Optional bundle key for special pricing across multiple days (e.g., Psychomotricity 1-day vs 2-days price) */
   bundleKey?: string; // e.g., "psychomotricity"
  };
+
+// Helper to display activity name in current language
+const activityDisplayName = (a: Activity, lang: Lang): string => {
+  if (lang === 'es' && a.nameEs) return a.nameEs;
+  if (lang === 'ca' && a.nameCa) return a.nameCa;
+  return a.name;
+};
 
  type GradeLevel = 'I3' | 'I4' | 'I5' | '1st' | '2nd' | '3rd' | '4th' | '5th' | '6th';
 
@@ -319,67 +329,68 @@ type Kid = {
  const ACTIVITIES: Activity[] = [
   // ————— MIDDAY —————
   // Monday
-  { id: "m_en_i4-2_mon", name: "English (UNICOR)", day: "Monday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–2nd", price: 58, period: "month", provider: "UNICOR Languages", notes: "2×/week (Mon+Wed)", materialsFee: 40, materialsKey: "unicor-english" },
-  { id: "m_theatre_3-6_mon", name: "Theatre (Núria Granell)", day: "Monday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 36, period: "month" },
+  { id: "m_en_i4-2_mon", name: "English (UNICOR)", nameEs: "Inglés (UNICOR)", nameCa: "Anglès (UNICOR)", day: "Monday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–2nd", price: 58, period: "month", provider: "UNICOR Languages", notes: "2×/week (Mon+Wed)", materialsFee: 40, materialsKey: "unicor-english" },
+  { id: "m_theatre_3-6_mon", name: "Theatre (Núria Granell)", nameEs: "Teatro (Núria Granell)", nameCa: "Teatre (Núria Granell)", day: "Monday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 36, period: "month" },
 
   // Tuesday
-  { id: "m_en_3-6_tue", name: "English (UNICOR)", day: "Tuesday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 58, period: "month", provider: "UNICOR Languages", notes: "2×/week (Tue+Thu)", materialsFee: 40, materialsKey: "unicor-english" },
-  { id: "m_chess_1-2_tue", name: "Chess", day: "Tuesday", slot: "Midday", time: "12:30–13:30", grades: "1st–2nd", price: 75, period: "term" },
-  { id: "m_rhythmic_tue", name: "Rhythmic Gymnastics", day: "Tuesday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–6th", price: 44, period: "month", notes: "2×/week (Tue+Thu)", provider: "Club Rítmica Sitges-Garraf" },
-  { id: "m_taijitsu_g1_tue", name: "Tai-Jitsu (Group 1)", day: "Tuesday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 28, period: "month", provider: "Mari Carmen Vila" },
+  { id: "m_en_3-6_tue", name: "English (UNICOR)", nameEs: "Inglés (UNICOR)", nameCa: "Anglès (UNICOR)", day: "Tuesday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 58, period: "month", provider: "UNICOR Languages", notes: "2×/week (Tue+Thu)", materialsFee: 40, materialsKey: "unicor-english" },
+  { id: "m_chess_1-2_tue", name: "Chess", nameEs: "Ajedrez", nameCa: "Escacs", day: "Tuesday", slot: "Midday", time: "12:30–13:30", grades: "1st–2nd", price: 75, period: "term" },
+  { id: "m_rhythmic_tue", name: "Rhythmic Gymnastics", nameEs: "Gimnasia rítmica", nameCa: "Gimnàstica rítmica", day: "Tuesday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–6th", price: 44, period: "month", notes: "2×/week (Tue+Thu)", provider: "Club Rítmica Sitges-Garraf" },
+  { id: "m_taijitsu_g1_tue", name: "Tai-Jitsu (Group 1)", nameEs: "Tai-Jitsu (Grupo 1)", nameCa: "Tai-Jitsu (Grup 1)", day: "Tuesday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 28, period: "month", provider: "Mari Carmen Vila" },
 
   // Wednesday
-  { id: "m_en_i4-2_wed", name: "English (UNICOR)", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–2nd", price: 58, period: "month", provider: "UNICOR Languages", notes: "2×/week (Mon+Wed)", materialsFee: 40, materialsKey: "unicor-english" },
-  { id: "m_chess_3-6_wed", name: "Chess", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 75, period: "term" },
-  { id: "m_hiphop_wed", name: "Hip Hop", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "1st–6th", price: 28, period: "month", provider: "Anna Batista" },
-  { id: "m_taijitsu_g2_wed", name: "Tai-Jitsu (Group 2)", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5", price: 28, period: "month", provider: "Mari Carmen Vila" },
-  { id: "m_taijitsu_g3_wed", name: "Tai-Jitsu (Group 3)", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "1st–2nd", price: 28, period: "month", provider: "Mari Carmen Vila" },
+  { id: "m_en_i4-2_wed", name: "English (UNICOR)", nameEs: "Inglés (UNICOR)", nameCa: "Anglès (UNICOR)", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–2nd", price: 58, period: "month", provider: "UNICOR Languages", notes: "2×/week (Mon+Wed)", materialsFee: 40, materialsKey: "unicor-english" },
+  { id: "m_chess_3-6_wed", name: "Chess", nameEs: "Ajedrez", nameCa: "Escacs", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 75, period: "term" },
+  { id: "m_hiphop_wed", name: "Hip Hop", nameEs: "Hip Hop", nameCa: "Hip Hop", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "1st–6th", price: 28, period: "month", provider: "Anna Batista" },
+  { id: "m_taijitsu_g2_wed", name: "Tai-Jitsu (Group 2)", nameEs: "Tai-Jitsu (Grupo 2)", nameCa: "Tai-Jitsu (Grup 2)", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5", price: 28, period: "month", provider: "Mari Carmen Vila" },
+  { id: "m_taijitsu_g3_wed", name: "Tai-Jitsu (Group 3)", nameEs: "Tai-Jitsu (Grupo 3)", nameCa: "Tai-Jitsu (Grup 3)", day: "Wednesday", slot: "Midday", time: "12:30–13:30", grades: "1st–2nd", price: 28, period: "month", provider: "Mari Carmen Vila" },
 
   // Thursday
-  { id: "m_art_thu", name: "Creative Art", day: "Thursday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5 (G1) & 1st–3rd (G2)", price: 78, period: "term", provider: "Irene Gil", materialsFee: 12, materialsKey: "creative-art-materials" },
-  { id: "m_en_3-6_thu", name: "English (UNICOR)", day: "Thursday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 58, period: "month", provider: "UNICOR Languages", notes: "2×/week (Tue+Thu)", materialsFee: 40, materialsKey: "unicor-english" },
-  { id: "m_robotics_thu", name: "Robotics", day: "Thursday", slot: "Midday", time: "12:30–13:30", grades: "1st–6th", price: 48, period: "month", provider: "Gerard Tristante" },
-  { id: "m_rhythmic_thu", name: "Rhythmic Gymnastics", day: "Thursday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–6th", price: 44, period: "month", notes: "2×/week (Tue+Thu)", provider: "Club Rítmica Sitges-Garraf" },
+  { id: "m_art_thu", name: "Creative Art", nameEs: "Arte creativo", nameCa: "Art creatiu", day: "Thursday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5 (G1) & 1st–3rd (G2)", price: 78, period: "term", provider: "Irene Gil", materialsFee: 12, materialsKey: "creative-art-materials" },
+  { id: "m_en_3-6_thu", name: "English (UNICOR)", nameEs: "Inglés (UNICOR)", nameCa: "Anglès (UNICOR)", day: "Thursday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 58, period: "month", provider: "UNICOR Languages", notes: "2×/week (Tue+Thu)", materialsFee: 40, materialsKey: "unicor-english" },
+  { id: "m_robotics_thu", name: "Robotics", nameEs: "Robótica", nameCa: "Robòtica", day: "Thursday", slot: "Midday", time: "12:30–13:30", grades: "1st–6th", price: 48, period: "month", provider: "Gerard Tristante" },
+  { id: "m_rhythmic_thu", name: "Rhythmic Gymnastics", nameEs: "Gimnasia rítmica", nameCa: "Gimnàstica rítmica", day: "Thursday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–6th", price: 44, period: "month", notes: "2×/week (Tue+Thu)", provider: "Club Rítmica Sitges-Garraf" },
 
   // Friday
-  { id: "m_comic_fri", name: "Comic & Manga", day: "Friday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 33, period: "month", provider: "Jordi Inglada", notes: "Only 12:30–13:30 shift" },
-  { id: "m_theatre_tracart_fri", name: "Theatre (TRACART)", day: "Friday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–2nd", price: 36, period: "month" },
+  { id: "m_comic_fri", name: "Comic & Manga", nameEs: "Cómic y manga", nameCa: "Còmic i manga", day: "Friday", slot: "Midday", time: "12:30–13:30", grades: "3rd–6th", price: 33, period: "month", provider: "Jordi Inglada", notes: "Only 12:30–13:30 shift" },
+  { id: "m_theatre_tracart_fri", name: "Theatre (TRACART)", nameEs: "Teatro (TRACART)", nameCa: "Teatre (TRACART)", day: "Friday", slot: "Midday", time: "12:30–13:30", grades: "I4/I5–2nd", price: 36, period: "month" },
 
   // ————— AFTERNOON —————
   // Monday
-  { id: "a_psy_mo", name: "Psychomotricity", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–I5", price: 75, period: "term", bundleKey: "psychomotricity" },
-  { id: "a_cooking_mo", name: "Creative Cooking", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 45, period: "month" },
-  { id: "a_futsal_mo", name: "Futsal", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 75, period: "term" },
-  { id: "a_acogida_mo", name: "Acogida", day: "Monday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
+  { id: "a_psy_mo", name: "Psychomotricity", nameEs: "Psicomotricidad", nameCa: "Psicomotricitat", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–I5", price: 75, period: "term", bundleKey: "psychomotricity" },
+  { id: "a_cooking_mo", name: "Creative Cooking", nameEs: "Cocina creativa", nameCa: "Cuina creativa", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 45, period: "month" },
+  { id: "a_futsal_mo", name: "Futsal", nameEs: "Fútbol sala", nameCa: "Futbol sala", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 75, period: "term" },
+  { id: "a_acogida_mo", name: "Acogida", nameEs: "Acogida", nameCa: "Acollida", day: "Monday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
 
   // Tuesday
-  { id: "a_swim_tu", name: "Swimming", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–6th", price: 147, period: "term", location: "Municipal Pool (Sitges)" },
-  { id: "a_padel_tu", name: "Padel", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 147, period: "term", location: "Municipal Pool (Sitges)" },
-  { id: "a_basket_tu", name: "Basketball", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 75, period: "term" },
-  { id: "a_french_tu", name: "French (UNICOR)", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–6th", price: 36, period: "month", provider: "UNICOR Languages", materialsFee: 20, materialsKey: "unicor-french" },
-  { id: "a_acogida_tu", name: "Acogida", day: "Tuesday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
+  { id: "a_swim_tu", name: "Swimming", nameEs: "Natación", nameCa: "Natació", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–6th", price: 147, period: "term", location: "Municipal Pool (Sitges)" },
+  { id: "a_padel_tu", name: "Padel", nameEs: "Pádel", nameCa: "Pàdel", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 147, period: "term", location: "Municipal Pool (Sitges)" },
+  { id: "a_basket_tu", name: "Basketball", nameEs: "Baloncesto", nameCa: "Bàsquet", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 75, period: "term" },
+  { id: "a_french_tu", name: "French (UNICOR)", nameEs: "Francés (UNICOR)", nameCa: "Francès (UNICOR)", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–6th", price: 36, period: "month", provider: "UNICOR Languages", materialsFee: 20, materialsKey: "unicor-french" },
+  { id: "a_acogida_tu", name: "Acogida", nameEs: "Acogida", nameCa: "Acollida", day: "Tuesday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
 
   // Wednesday
-  { id: "a_yoga12_we", name: "Creative Yoga", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–2nd", price: 35, period: "month", provider: "Sara Argibay" },
-  { id: "a_dance_we", name: "Creative Dance", day: "Wednesday", slot: "Afternoon", time: "16:30–17:30", grades: "I4/I5–2nd", price: 75, period: "term", provider: "Eva Hernández" },
-  { id: "a_skate_we", name: "Skateboarding", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 120, period: "term" },
-  { id: "a_beginskate_we", name: "Beginner Skating", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–2nd", price: 75, period: "term" },
-  { id: "a_lettering_we", name: "Lettering (Hand-lettering)", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–6th", price: 35, period: "month", provider: "Mercè Pedraza" },
-  { id: "a_acogida_we", name: "Acogida", day: "Wednesday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
+  { id: "a_yoga12_we", name: "Creative Yoga", nameEs: "Yoga creativo", nameCa: "Ioga creatiu", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–2nd", price: 35, period: "month", provider: "Sara Argibay" },
+  { id: "a_dance_we", name: "Creative Dance", nameEs: "Danza creativa", nameCa: "Dansa creativa", day: "Wednesday", slot: "Afternoon", time: "16:30–17:30", grades: "I4/I5–2nd", price: 75, period: "term", provider: "Eva Hernández" },
+  { id: "a_skate_we", name: "Skateboarding", nameEs: "Skate", nameCa: "Skate", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 120, period: "term" },
+  { id: "a_beginskate_we", name: "Beginner Skating", nameEs: "Patinaje inicial", nameCa: "Patinatge inicial", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–2nd", price: 75, period: "term" },
+  { id: "a_lettering_we", name: "Lettering (Hand-lettering)", nameEs: "Lettering (caligrafía creativa)", nameCa: "Lettering (cal·ligrafia creativa)", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–6th", price: 35, period: "month", provider: "Mercè Pedraza" },
+  { id: "a_acogida_we", name: "Acogida", nameEs: "Acogida", nameCa: "Acollida", day: "Wednesday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
 
   // Thursday
-  { id: "a_psy_th", name: "Psychomotricity", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–I5", price: 75, period: "term", bundleKey: "psychomotricity" },
-  { id: "a_yoga_i4i5_th", name: "Creative Yoga", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5", price: 35, period: "month", provider: "Sara Argibay" },
-  { id: "a_sportsinit_th", name: "Sports Initiation", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–2nd", price: 75, period: "term" },
-  { id: "a_tennis_th", name: "Tennis at school", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 35, period: "month", provider: "Izan Madera" },
-  { id: "a_acogida_th", name: "Acogida", day: "Thursday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
+  { id: "a_psy_th", name: "Psychomotricity", nameEs: "Psicomotricidad", nameCa: "Psicomotricitat", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–I5", price: 75, period: "term", bundleKey: "psychomotricity" },
+  { id: "a_yoga_i4i5_th", name: "Creative Yoga", nameEs: "Yoga creativo", nameCa: "Ioga creatiu", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5", price: 35, period: "month", provider: "Sara Argibay" },
+  { id: "a_sportsinit_th", name: "Sports Initiation", nameEs: "Iniciación deportiva", nameCa: "Iniciació esportiva", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–2nd", price: 75, period: "term" },
+  { id: "a_tennis_th", name: "Tennis at school", nameEs: "Tenis en la escuela", nameCa: "Tennis a l'escola", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 35, period: "month", provider: "Izan Madera" },
+  { id: "a_acogida_th", name: "Acogida", nameEs: "Acogida", nameCa: "Acollida", day: "Thursday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
 
   // Friday
-  { id: "a_ukulele_fr", name: "Ukulele", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "2nd–6th", price: 45, period: "month", provider: "Musicarea", notes: "Bring your ukulele (options shared at start of term)" },
-  { id: "a_musicsense_fr", name: "Music Sensitization", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–1st", price: 45, period: "month", provider: "Musicarea" },
-  { id: "a_fencing_fr", name: "Fencing", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 38, period: "month", provider: "SAG Club d'Esgrima" },
-  { id: "a_acogida_fr", name: "Acogida", day: "Friday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
- ];
+  { id: "a_ukulele_fr", name: "Ukulele", nameEs: "Ukelele", nameCa: "Ukelele", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "2nd–6th", price: 45, period: "month", provider: "Musicarea", notes: "Bring your ukulele (options shared at start of term)" },
+  { id: "a_musicsense_fr", name: "Music Sensitization", nameEs: "Sensibilización musical", nameCa: "Sensibilització musical", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–1st", price: 45, period: "month", provider: "Musicarea" },
+  { id: "a_fencing_fr", name: "Fencing", nameEs: "Esgrima", nameCa: "Esgrima", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 38, period: "month", provider: "SAG Club d'Esgrima" },
+  { id: "a_acogida_fr", name: "Acogida", nameEs: "Acogida", nameCa: "Acollida", day: "Friday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
+];
+
 
  /**
   * Pricing logic
@@ -575,7 +586,7 @@ type Kid = {
         const activity = ACTIVITIES.find(a => a.id === activityId);
         const kid = p.kids.find(k => k.id === kidId) as Kid | undefined;
         if (activity && kid && !isKidEligibleFor(activity, kid)) {
-          alert(t(lang, 'notEligibleAlert', { kidName: kid.name, kidGrade: kid.grade, activityName: activity.name, activityGrades: activity.grades }));
+          alert(t(lang, 'notEligibleAlert', { kidName: kid.name, kidGrade: kid.grade, activityName: activityDisplayName(activity, lang), activityGrades: activity.grades }));
           return p; // no change
         }
       }
@@ -755,7 +766,7 @@ type Kid = {
                 <h3 className="font-medium text-amber-800">{t(lang, 'conflictsTitle')}</h3>
                 <ul className="mt-2 text-sm text-amber-900 list-disc ml-5 space-y-1">
                   {conflicts.slice(0, 8).map((c, i) => (
-                    <li key={i}><b>{c.kidName}</b>: {c.day} {c.slot} — "{c.a.name}" vs "{c.b.name}" ({c.a.time || t(lang, 'slot')} / {c.b.time || t(lang, 'slot')})</li>
+                    <li key={i}><b>{c.kidName}</b>: {c.day} {c.slot} — "{activityDisplayName(c.a, lang)}" vs "{activityDisplayName(c.b, lang)}" ({c.a.time || t(lang, 'slot')} / {c.b.time || t(lang, 'slot')})</li>
                   ))}
                 </ul>
                 {conflicts.length > 8 && <p className="text-sm mt-1">{t(lang, 'andMore', { count: conflicts.length - 8 })}</p>}
@@ -921,7 +932,7 @@ type Kid = {
     <div className="rounded-xl border p-3 shadow-sm hover:shadow transition dark:border-slate-700">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="font-medium">{activity.name}</div>
+          <div className="font-medium">{activityDisplayName(activity, lang)}</div>
           <div className="text-xs text-slate-500 mt-0.5">{activity.grades}</div>
           <div className="text-xs text-slate-500">{activity.time || (activity.slot === "Midday" ? t(lang, 'timeMiddaySlot') : t(lang, 'timeAfternoonSlot'))}</div>
           {activity.provider && <div className="text-xs text-slate-500">{activity.provider}{activity.location ? ` · ${activity.location}` : ""}</div>}
