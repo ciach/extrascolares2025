@@ -152,12 +152,14 @@ type Kid = {
   { id: "a_psy_mo", name: "Psychomotricity", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–I5", price: 75, period: "term", bundleKey: "psychomotricity" },
   { id: "a_cooking_mo", name: "Creative Cooking", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 45, period: "month" },
   { id: "a_futsal_mo", name: "Futsal", day: "Monday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 75, period: "term" },
+  { id: "a_acogida_mo", name: "Acogida", day: "Monday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
 
   // Tuesday
   { id: "a_swim_tu", name: "Swimming", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–6th", price: 147, period: "term", location: "Municipal Pool (Sitges)" },
   { id: "a_padel_tu", name: "Padel", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 147, period: "term", location: "Municipal Pool (Sitges)" },
   { id: "a_basket_tu", name: "Basketball", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 75, period: "term" },
   { id: "a_french_tu", name: "French (UNICOR)", day: "Tuesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–6th", price: 36, period: "month", provider: "UNICOR Languages", materialsFee: 20, materialsKey: "unicor-french" },
+  { id: "a_acogida_tu", name: "Acogida", day: "Tuesday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
 
   // Wednesday
   { id: "a_yoga12_we", name: "Creative Yoga", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–2nd", price: 35, period: "month", provider: "Sara Argibay" },
@@ -165,17 +167,20 @@ type Kid = {
   { id: "a_skate_we", name: "Skateboarding", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 120, period: "term" },
   { id: "a_beginskate_we", name: "Beginner Skating", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–2nd", price: 75, period: "term" },
   { id: "a_lettering_we", name: "Lettering (Hand-lettering)", day: "Wednesday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–6th", price: 35, period: "month", provider: "Mercè Pedraza" },
+  { id: "a_acogida_we", name: "Acogida", day: "Wednesday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
 
   // Thursday
   { id: "a_psy_th", name: "Psychomotricity", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "I3–I5", price: 75, period: "term", bundleKey: "psychomotricity" },
   { id: "a_yoga_i4i5_th", name: "Creative Yoga", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5", price: 35, period: "month", provider: "Sara Argibay" },
   { id: "a_sportsinit_th", name: "Sports Initiation", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–2nd", price: 75, period: "term" },
   { id: "a_tennis_th", name: "Tennis at school", day: "Thursday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 35, period: "month", provider: "Izan Madera" },
+  { id: "a_acogida_th", name: "Acogida", day: "Thursday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
 
   // Friday
   { id: "a_ukulele_fr", name: "Ukulele", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "2nd–6th", price: 45, period: "month", provider: "Musicarea", notes: "Bring your ukulele (options shared at start of term)" },
   { id: "a_musicsense_fr", name: "Music Sensitization", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "I4/I5–1st", price: 45, period: "month", provider: "Musicarea" },
   { id: "a_fencing_fr", name: "Fencing", day: "Friday", slot: "Afternoon", time: "16:30–17:45", grades: "1st–6th", price: 38, period: "month", provider: "SAG Club d'Esgrima" },
+  { id: "a_acogida_fr", name: "Acogida", day: "Friday", slot: "Afternoon", time: "16:30–17:30", grades: "I4–6th", price: 35, period: "month" },
  ];
 
  /**
