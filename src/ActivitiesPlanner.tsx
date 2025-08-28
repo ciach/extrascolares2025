@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Download, Upload, Printer, Plus, Trash2, AlertTriangle, X } from "lucide-react";
 
 // Tailwind-based, single-file React + TypeScript app
