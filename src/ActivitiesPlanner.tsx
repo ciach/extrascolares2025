@@ -444,7 +444,7 @@ type Kid = {
       {/* Header */}
       <header className="sticky top-0 z-20 backdrop-blur bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-700">
         <div className="w-full px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">Maria Ossó Activities Planner</h1>
+          <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">gatperlleure Activities Planner</h1>
           <div className="flex gap-2">
             <button onClick={() => window.print()} className="inline-flex items-center gap-2 px-3 py-2 rounded-2xl border bg-slate-100 text-slate-800 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:border-slate-700">
               <Printer className="w-4 h-4"/> Print
