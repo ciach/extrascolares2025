@@ -9,15 +9,17 @@
   }
 }
 
-/* Dark mode friendly form controls */
-@media (prefers-color-scheme: dark) {
-  @layer base {
-    body { @apply bg-slate-900 text-slate-100; }
-    input[type="text"], input[type="search"], input[type="email"], input[type="number"], input[type="password"], textarea, select {
-      @apply bg-slate-800 border border-slate-700 text-slate-100 placeholder-slate-400;
-    }
-    button { @apply bg-slate-800 text-slate-100; }
-  }
+/* Dark mode styles driven by the .dark class on html */
+@layer base {
+  .dark body { @apply bg-slate-900 text-slate-100; }
+  .dark input[type="text"],
+  .dark input[type="search"],
+  .dark input[type="email"],
+  .dark input[type="number"],
+  .dark input[type="password"],
+  .dark textarea,
+  .dark select { @apply bg-slate-800 border border-slate-700 text-slate-100 placeholder-slate-400; }
+  .dark button { @apply bg-slate-800 text-slate-100; }
 }
 
 a {
@@ -52,8 +54,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Optional light-only tweaks */
 @media (prefers-color-scheme: light) {
-  a:hover {
-    color: #747bff;
-  }
+  a:hover { color: #747bff; }
 }

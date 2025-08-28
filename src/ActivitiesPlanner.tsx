@@ -956,11 +956,12 @@ type Kid = {
             <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: kid.color }} />
             {kid.name}
             <button
-              className="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 dark:text-slate-700 dark:bg-slate-100 dark:hover:bg-slate-200 dark:border-slate-300"
+              className="ml-1 inline-flex items-center justify-center w-7 h-7 rounded-full border bg-white/5 hover:bg-white/10"
+              style={{ color: kid.color, borderColor: kid.color }}
               title={t(lang, 'removeKidTitle', { name: kid.name })}
               onClick={() => onToggle(activity.id, kid.id)}
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="w-5 h-5" stroke={kid.color} strokeWidth={3.5} />
             </button>
           </span>
         ))}
