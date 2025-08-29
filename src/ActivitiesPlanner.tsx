@@ -704,7 +704,7 @@ type Kid = {
                   <span key={k.id} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border shadow-sm dark:border-slate-700">
                     <span className="w-3 h-3 rounded-full" style={{ backgroundColor: k.color }} /> {k.name}
                     <span className="text-xs text-slate-500 dark:text-slate-300">({k.grade})</span>
-                    <button onClick={() => removeKid(k.id)} className="ml-1 text-slate-400 hover:text-red-600 dark:text-slate-300 dark:hover:text-red-400" title={t(lang, 'remove')}><X className="w-4 h-4"/></button>
+                    <button onClick={() => removeKid(k.id)} className="ml-1 text-slate-400 hover:text-red-600 dark:text-slate-300 dark:hover:text-red-400" title={t(lang, 'remove')}><X className="w-5 h-5" stroke={k.color} strokeWidth={3.5} /></button>
                   </span>
                 ))}
               </div>
@@ -956,12 +956,13 @@ type Kid = {
             <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: kid.color }} />
             {kid.name}
             <button
-              className="ml-1 inline-flex items-center justify-center w-7 h-7 rounded-full border bg-white/5 hover:bg-white/10"
+              className="ml-1 inline-flex items-center justify-center w-7 h-7 rounded-full border bg-white/15 hover:bg-white/20 relative"
               style={{ color: kid.color, borderColor: kid.color }}
               title={t(lang, 'removeKidTitle', { name: kid.name })}
               onClick={() => onToggle(activity.id, kid.id)}
             >
-              <X className="w-5 h-5" stroke={kid.color} strokeWidth={3.5} />
+              {/* white outline underneath for contrast */}
+              <X className="w-6 h-6 absolute" stroke={kid.color} strokeOpacity={0.9} strokeWidth={3.5} />
             </button>
           </span>
         ))}
