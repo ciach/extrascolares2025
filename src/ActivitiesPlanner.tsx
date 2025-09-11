@@ -397,6 +397,7 @@ type Kid = {
   * — month: use as-is for monthly view
   * — term: for normalized-monthly view, divide by 3 (≈ 3 months/term)
   * — bundles: psychomotricity (Mon+Thu) is 75€/term for 1 day or 135€/term for 2 days (per kid)
+  * — Acogida: fixed 35€/month per kid regardless of how many days they attend (Mon-Fri)
   */
  function computeFinancials(
   plan: PlanState,
@@ -414,12 +415,19 @@ type Kid = {
   // Psychomotricity bundle handling
   // Collect psychomotricity selections per kid
   const psychoCountByKid = new Map<string, number>();
+  // Track Acogida assignments per kid
+  const acogidaByKid = new Map<string, boolean>();
+  
   for (const [actId, kidIds] of Object.entries(plan.assignments)) {
     const act = ACTIVITIES.find(a => a.id === actId);
     if (!act) continue;
     kidIds.forEach(kidId => {
       if (act.bundleKey === "psychomotricity") {
         psychoCountByKid.set(kidId, (psychoCountByKid.get(kidId) || 0) + 1);
+      }
+      // Track if kid is assigned to any Acogida activity
+      if (act.name === "Acogida") {
+        acogidaByKid.set(kidId, true);
       }
     });
   }
@@ -443,6 +451,9 @@ type Kid = {
 
       // Skip psychomotricity here; handle as a bundle later in a second pass
       if (act.bundleKey === "psychomotricity") continue;
+      
+      // Skip Acogida here; handle as a special case later
+      if (act.name === "Acogida") continue;
 
       if (act.period === "month") {
         agg.monthly += act.price;
@@ -462,6 +473,15 @@ type Kid = {
     const bundleTerm = count >= 2 ? 135 : 75; // one price per kid regardless of 2+ selections (cap at 2)
     agg.term += bundleTerm;
     if (normalizeMonthly) agg.monthly += bundleTerm / 3;
+  }
+  
+  // Third pass: apply Acogida special pricing (fixed 35€/month regardless of days attended)
+  for (const kid of plan.kids) {
+    const hasAcogida = acogidaByKid.get(kid.id) || false;
+    if (!hasAcogida) continue;
+    const agg = perKid.get(kid.id)!;
+    // Add the fixed 35€ monthly fee once per kid
+    agg.monthly += 35;
   }
 
   // Totals
