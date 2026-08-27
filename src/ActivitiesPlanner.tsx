@@ -825,10 +825,10 @@ type Kid = {
   return (
     <div className="min-h-screen bg-[#f4f7f6] text-slate-900 dark:bg-slate-950 dark:text-slate-100">
       <header className="no-print sticky top-0 z-30 border-b border-slate-200/80 bg-[#f4f7f6]/90 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/90">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:px-6">
           <div className="flex min-w-0 items-center gap-3">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-emerald-700 text-white shadow-sm">
-              <CalendarDays className="h-5 w-5" />
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-emerald-700 text-white shadow-sm">
+              <CalendarDays className="h-4 w-4" />
             </span>
             <div className="min-w-0">
               <p className="truncate text-sm font-bold tracking-tight">{t(lang, 'title')}</p>
@@ -836,7 +836,7 @@ type Kid = {
             </div>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2">
-            <select aria-label="Language" value={lang} onChange={e => setLang(e.target.value as Lang)} className="h-10 rounded-xl border border-slate-200 bg-white px-2 text-sm font-semibold dark:border-slate-700 dark:bg-slate-900">
+            <select aria-label="Language" value={lang} onChange={e => setLang(e.target.value as Lang)} className="h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs font-semibold dark:border-slate-700 dark:bg-slate-900">
               <option value="en">EN</option>
               <option value="es">ES</option>
               <option value="ca">CA</option>
@@ -855,46 +855,46 @@ type Kid = {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-7xl px-4 py-5 sm:px-6 sm:py-8">
-        <section className="relative overflow-hidden rounded-[2rem] bg-slate-950 px-5 py-7 text-white shadow-xl shadow-slate-900/10 sm:px-8 sm:py-9">
+      <main className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-5">
+        <section className="relative overflow-hidden rounded-3xl bg-slate-950 px-5 py-5 text-white shadow-xl shadow-slate-900/10 sm:px-6 sm:py-6">
           <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-emerald-400/20 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-32 left-1/3 h-64 w-64 rounded-full bg-sky-400/15 blur-3xl" />
-          <div className="relative grid gap-7 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
+          <div className="relative grid gap-4 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
             <div>
-              <div className="mb-4 flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-emerald-300">
+              <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-emerald-300">
                 <span>{t(lang, 'eyebrow')}</span>
                 <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 tracking-normal text-white">{t(lang, 'courseLabel')}</span>
               </div>
-              <h1 className="max-w-3xl text-3xl font-black tracking-[-0.04em] sm:text-5xl">{t(lang, 'title')}</h1>
-              <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">{t(lang, 'heroDescription')}</p>
-              <p className="mt-4 inline-flex items-center gap-2 text-xs font-medium text-slate-400">
+              <h1 className="max-w-3xl text-2xl font-black tracking-[-0.04em] sm:text-3xl">{t(lang, 'title')}</h1>
+              <p className="mt-2 max-w-2xl text-sm leading-5 text-slate-300">{t(lang, 'heroDescription')}</p>
+              <p className="mt-2 inline-flex items-center gap-2 text-[11px] font-medium text-slate-400">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />{t(lang, 'verifiedOn')}
               </p>
             </div>
             <div className="grid grid-cols-3 gap-2">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-3 sm:p-4">
-                <div className="flex items-center gap-1.5 text-rose-300"><ArrowUpRight className="h-4 w-4"/><span className="text-2xl font-black">{PRICE_INCREASES}</span></div>
-                <p className="mt-1 text-[11px] leading-4 text-slate-300 sm:text-xs">{t(lang, 'priceIncreases')}</p>
+              <div className="rounded-xl border border-white/10 bg-white/[0.07] p-2.5">
+                <div className="flex items-center gap-1 text-rose-300"><ArrowUpRight className="h-3.5 w-3.5"/><span className="text-xl font-black">{PRICE_INCREASES}</span></div>
+                <p className="text-[10px] leading-4 text-slate-300">{t(lang, 'priceIncreases')}</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-3 sm:p-4">
-                <div className="flex items-center gap-1.5 text-emerald-300"><ArrowDownRight className="h-4 w-4"/><span className="text-2xl font-black">{PRICE_DECREASES}</span></div>
-                <p className="mt-1 text-[11px] leading-4 text-slate-300 sm:text-xs">{t(lang, 'priceDecrease')}</p>
+              <div className="rounded-xl border border-white/10 bg-white/[0.07] p-2.5">
+                <div className="flex items-center gap-1 text-emerald-300"><ArrowDownRight className="h-3.5 w-3.5"/><span className="text-xl font-black">{PRICE_DECREASES}</span></div>
+                <p className="text-[10px] leading-4 text-slate-300">{t(lang, 'priceDecrease')}</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-3 sm:p-4">
-                <div className="flex items-center gap-1.5 text-sky-300"><Sparkles className="h-4 w-4"/><span className="text-2xl font-black">{CATALOG_CHANGES}</span></div>
-                <p className="mt-1 text-[11px] leading-4 text-slate-300 sm:text-xs">{t(lang, 'catalogChanges')}</p>
+              <div className="rounded-xl border border-white/10 bg-white/[0.07] p-2.5">
+                <div className="flex items-center gap-1 text-sky-300"><Sparkles className="h-3.5 w-3.5"/><span className="text-xl font-black">{CATALOG_CHANGES}</span></div>
+                <p className="text-[10px] leading-4 text-slate-300">{t(lang, 'catalogChanges')}</p>
               </div>
             </div>
           </div>
-          <div className="relative mt-7 border-t border-white/10 pt-5">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-400">{t(lang, 'officialSources')}</p>
+          <div className="relative mt-4 border-t border-white/10 pt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">{t(lang, 'officialSources')}</p>
             <div className="flex flex-wrap gap-2">
               {([
                 [SOURCE_URLS.midday, 'middaySource'],
                 [SOURCE_URLS.afternoon, 'afternoonSource'],
                 [SOURCE_URLS.care, 'careSource'],
               ] as const).map(([url, label]) => (
-                <a key={url} href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold text-white transition hover:bg-white/15">
+                <a key={url} href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[11px] font-semibold text-white transition hover:bg-white/15">
                   {t(lang, label)}<ExternalLink className="h-3.5 w-3.5" />
                 </a>
               ))}
@@ -902,32 +902,32 @@ type Kid = {
           </div>
         </section>
 
-        <section className="mt-4 grid gap-3 lg:grid-cols-2">
-          <div className="flex items-start gap-3 rounded-2xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950 dark:border-sky-900 dark:bg-sky-950/30 dark:text-sky-100">
+        <section className="mt-3 grid gap-2 lg:grid-cols-2">
+          <div className="flex items-start gap-2 rounded-xl border border-sky-200 bg-sky-50 p-3 text-xs leading-5 text-sky-950 dark:border-sky-900 dark:bg-sky-950/30 dark:text-sky-100">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-sky-600" />
             <p>{t(lang, 'sourceCaveat')}</p>
           </div>
-          <div className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
+          <div className="flex items-start gap-2 rounded-xl border border-slate-200 bg-white p-3 text-xs leading-5 text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
             <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-violet-600" />
-            <div><p className="font-semibold text-slate-900 dark:text-white">{t(lang, 'changesCompared')}</p><p className="mt-1 text-xs leading-5">{t(lang, 'removedActivities')}</p></div>
+            <div><p className="font-semibold text-slate-900 dark:text-white">{t(lang, 'changesCompared')}</p><p>{t(lang, 'removedActivities')}</p></div>
           </div>
         </section>
 
-        <section className="no-print mt-6 grid gap-4 lg:grid-cols-12">
+        <section className="no-print mt-4 grid gap-3 lg:grid-cols-12">
           <div className="app-panel lg:col-span-5">
             <h2 className="app-panel-title">{t(lang, 'addKid')}</h2>
-            <div className="grid grid-cols-[1fr_auto] gap-2 sm:grid-cols-[1fr_auto_auto_auto]">
+            <div className="grid grid-cols-[1fr_auto] gap-1.5 sm:grid-cols-[1fr_auto_auto_auto]">
               <input value={newKidName} onChange={e => setNewKidName(e.target.value)} onKeyDown={e => e.key === 'Enter' && addKid()} placeholder={t(lang, 'namePlaceholder')} className="app-field min-w-0" />
-              <input aria-label="Color" type="color" value={newKidColor} onChange={e => setNewKidColor(e.target.value)} className="h-11 w-12 rounded-xl border border-slate-200 bg-white p-1 dark:border-slate-700 dark:bg-slate-900" />
+              <input aria-label="Color" type="color" value={newKidColor} onChange={e => setNewKidColor(e.target.value)} className="h-9 w-10 rounded-lg border border-slate-200 bg-white p-1 dark:border-slate-700 dark:bg-slate-900" />
               <select value={newKidGrade} onChange={e => setNewKidGrade(e.target.value as GradeLevel)} className="app-field col-span-1 sm:col-span-1">
                 {(['I3','I4','I5','1st','2nd','3rd','4th','5th','6th','Adult'] as GradeLevel[]).map(grade => <option key={grade} value={grade}>{grade}</option>)}
               </select>
-              <button onClick={addKid} className="inline-flex h-11 items-center justify-center gap-1.5 rounded-xl bg-emerald-700 px-4 text-sm font-bold text-white transition hover:bg-emerald-600"><Plus className="h-4 w-4"/>{t(lang, 'add')}</button>
+              <button onClick={addKid} className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-emerald-700 px-3 text-xs font-bold text-white transition hover:bg-emerald-600"><Plus className="h-3.5 w-3.5"/>{t(lang, 'add')}</button>
             </div>
             {plan.kids.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-2.5 flex flex-wrap gap-1.5">
                 {plan.kids.map(person => (
-                  <span key={person.id} className="inline-flex min-h-9 items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 text-sm dark:border-slate-700 dark:bg-slate-800">
+                  <span key={person.id} className="inline-flex min-h-7 items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-2.5 text-xs dark:border-slate-700 dark:bg-slate-800">
                     <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: person.color }} />{person.name}
                     <span className="text-xs text-slate-500">{person.grade}</span>
                     <button onClick={() => removeKid(person.id)} className="-mr-1 grid h-7 w-7 place-items-center rounded-full text-slate-400 hover:bg-rose-50 hover:text-rose-600" title={t(lang, 'remove')}><X className="h-4 w-4" /></button>
@@ -938,12 +938,12 @@ type Kid = {
           </div>
 
           <div className="app-panel lg:col-span-5">
-            <div className="mb-3 flex items-center justify-between gap-3"><h2 className="app-panel-title mb-0">{t(lang, 'filters')}</h2><button onClick={resetFilters} className="text-xs font-semibold text-emerald-700 hover:text-emerald-600">{t(lang, 'clearFilters')}</button></div>
-            <div className="relative mb-2">
+            <div className="mb-2 flex items-center justify-between gap-3"><h2 className="app-panel-title mb-0">{t(lang, 'filters')}</h2><button onClick={resetFilters} className="text-[11px] font-semibold text-emerald-700 hover:text-emerald-600">{t(lang, 'clearFilters')}</button></div>
+            <div className="relative mb-1.5">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder={t(lang, 'searchActivities')} className="app-field w-full pl-9" />
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-1.5">
               <select value={filterKidId} onChange={e => setFilterKidId(e.target.value)} className="app-field">
                 <option value="all">{t(lang, 'allKids')}</option>
                 {plan.kids.map(person => <option key={person.id} value={person.id}>{person.name}</option>)}
@@ -957,7 +957,7 @@ type Kid = {
                 <option value="all">{t(lang, 'allDays')}</option>
                 {DAYS.map(day => <option key={day} value={day}>{t(lang, day.toLowerCase())}</option>)}
               </select>
-              <label className="col-span-2 flex cursor-pointer items-center gap-2 pt-1 text-sm text-slate-600 dark:text-slate-300">
+              <label className="col-span-2 flex cursor-pointer items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
                 <input type="checkbox" checked={onlyAssignedForKid} onChange={e => setOnlyAssignedForKid(e.target.checked)} className="h-4 w-4 accent-emerald-700" />
                 <span>{t(lang, 'onlyAssigned')} {filterKidId !== "all" && t(lang, 'onlyAssignedSuffixForKid')}</span>
               </label>
@@ -966,44 +966,44 @@ type Kid = {
 
           <div className="app-panel lg:col-span-2">
             <h2 className="app-panel-title">{t(lang, 'financialView')}</h2>
-            <label className="flex cursor-pointer items-start gap-2 text-sm leading-5">
+            <label className="flex cursor-pointer items-start gap-2 text-xs leading-5">
               <input type="checkbox" checked={normalizeMonthly} onChange={e => setNormalizeMonthly(e.target.checked)} className="mt-0.5 h-4 w-4 accent-emerald-700" />
               <span>{t(lang, 'normalizedToggle')}</span>
             </label>
-            <p className="mt-3 text-xs leading-5 text-slate-500">{t(lang, 'materialsInfo')}</p>
-            <button onClick={clearAll} className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-rose-600 hover:text-rose-500"><Trash2 className="h-4 w-4"/>{t(lang, 'clearAll')}</button>
+            <p className="mt-2 text-[11px] leading-4 text-slate-500">{t(lang, 'materialsInfo')}</p>
+            <button onClick={clearAll} className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-rose-600 hover:text-rose-500"><Trash2 className="h-3.5 w-3.5"/>{t(lang, 'clearAll')}</button>
           </div>
         </section>
 
         {conflicts.length > 0 && (
-          <section className="mt-6 flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 shadow-sm dark:border-amber-900 dark:bg-amber-950/30">
+          <section className="mt-4 flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3 shadow-sm dark:border-amber-900 dark:bg-amber-950/30">
             <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600"/>
             <div>
-              <h3 className="font-bold text-amber-950 dark:text-amber-100">{t(lang, 'conflictsTitle')}</h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-amber-900 dark:text-amber-200">
+              <h3 className="text-sm font-bold text-amber-950 dark:text-amber-100">{t(lang, 'conflictsTitle')}</h3>
+              <ul className="mt-1 list-disc space-y-0.5 pl-4 text-xs leading-5 text-amber-900 dark:text-amber-200">
                 {conflicts.slice(0, 8).map((conflict, index) => (
                   <li key={index}><b>{conflict.kidName}</b>: {t(lang, conflict.day.toLowerCase())} — “{activityDisplayName(conflict.a, lang)}” / “{activityDisplayName(conflict.b, lang)}”</li>
                 ))}
               </ul>
-              {conflicts.length > 8 && <p className="mt-1 text-sm">{t(lang, 'andMore', { count: conflicts.length - 8 })}</p>}
+              {conflicts.length > 8 && <p className="mt-1 text-xs">{t(lang, 'andMore', { count: conflicts.length - 8 })}</p>}
             </div>
           </section>
         )}
 
-        <section className="mt-8" aria-labelledby="weekly-schedule">
-          <div className="mb-5 flex items-end justify-between gap-4">
-            <div><p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">{t(lang, 'eyebrow')}</p><h2 id="weekly-schedule" className="mt-1 text-2xl font-black tracking-tight sm:text-3xl">{t(lang, 'schedule')}</h2></div>
+        <section className="mt-5" aria-labelledby="weekly-schedule">
+          <div className="mb-3 flex items-end justify-between gap-4">
+            <div><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-700">{t(lang, 'eyebrow')}</p><h2 id="weekly-schedule" className="text-xl font-black tracking-tight sm:text-2xl">{t(lang, 'schedule')}</h2></div>
             <p className="hidden text-sm text-slate-500 sm:block">{filteredActivities.length} · {t(lang, 'courseLabel')}</p>
           </div>
 
           {visibleDays.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-900">{t(lang, 'noActivities')}</div>
+            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-7 text-center text-xs text-slate-500 dark:border-slate-700 dark:bg-slate-900">{t(lang, 'noActivities')}</div>
           ) : (
-            <div className="space-y-5">
+            <div className="space-y-3">
               {visibleDays.map(day => (
-                <article key={day} className="rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                  <div className="rounded-t-[1.4rem] border-b border-slate-100 bg-slate-50/70 px-5 py-3.5 dark:border-slate-800 dark:bg-slate-900">
-                    <h3 className="text-lg font-black tracking-tight">{t(lang, day.toLowerCase())}</h3>
+                <article key={day} className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+                  <div className="rounded-t-[0.95rem] border-b border-slate-100 bg-slate-50/70 px-4 py-2 dark:border-slate-800 dark:bg-slate-900">
+                    <h3 className="text-base font-black tracking-tight">{t(lang, day.toLowerCase())}</h3>
                   </div>
                   <div className={`grid gap-px bg-slate-200 dark:bg-slate-800 ${filterSlot === 'both' ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
                     {(filterSlot === 'both' || filterSlot === 'Midday') && (
@@ -1019,28 +1019,28 @@ type Kid = {
           )}
         </section>
 
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
-          <h2 className="text-xl font-black tracking-tight">{t(lang, 'financialSummary')}</h2>
+        <section className="mt-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h2 className="text-lg font-black tracking-tight">{t(lang, 'financialSummary')}</h2>
           {plan.kids.length === 0 ? (
             <p className="mt-3 text-sm text-slate-500">{t(lang, 'addKidsHint')}</p>
           ) : (
-            <div className="mt-4 overflow-x-auto">
+            <div className="mt-2 overflow-x-auto">
               <table className="w-full min-w-[650px] text-sm">
-                <thead><tr className="border-b border-slate-200 text-left text-xs uppercase tracking-wide text-slate-500 dark:border-slate-700"><th className="py-3 pr-3">{t(lang, 'kid')}</th><th className="px-3 py-3">{t(lang, 'monthlyNorm')}</th><th className="px-3 py-3">{t(lang, 'termTotal')}</th><th className="px-3 py-3">{t(lang, 'materialsOnce')}</th></tr></thead>
+                <thead><tr className="border-b border-slate-200 text-left text-[11px] uppercase tracking-wide text-slate-500 dark:border-slate-700"><th className="py-2 pr-3">{t(lang, 'kid')}</th><th className="px-3 py-2">{t(lang, 'monthlyNorm')}</th><th className="px-3 py-2">{t(lang, 'termTotal')}</th><th className="px-3 py-2">{t(lang, 'materialsOnce')}</th></tr></thead>
                 <tbody>
                   {plan.kids.map(person => {
                     const row = financials.perKid.get(person.id)!;
-                    return <tr key={person.id} className="border-b border-slate-100 last:border-0 dark:border-slate-800"><td className="py-3 pr-3"><span className="inline-flex items-center gap-2 font-semibold"><span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: person.color }} />{person.name}</span></td><td className="px-3 py-3">{normalizeMonthly ? `${row.monthly.toFixed(2)} € / ${t(lang, 'perMonthShort')}` : '—'}</td><td className="px-3 py-3">{row.term.toFixed(2)} € / {t(lang, 'perTermShort')}</td><td className="px-3 py-3">{row.materials.toFixed(2)} €</td></tr>;
+                    return <tr key={person.id} className="border-b border-slate-100 last:border-0 dark:border-slate-800"><td className="py-2 pr-3"><span className="inline-flex items-center gap-2 font-semibold"><span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: person.color }} />{person.name}</span></td><td className="px-3 py-2">{normalizeMonthly ? `${row.monthly.toFixed(2)} € / ${t(lang, 'perMonthShort')}` : '—'}</td><td className="px-3 py-2">{row.term.toFixed(2)} € / {t(lang, 'perTermShort')}</td><td className="px-3 py-2">{row.materials.toFixed(2)} €</td></tr>;
                   })}
                 </tbody>
-                <tfoot><tr className="border-t-2 border-slate-200 font-black dark:border-slate-700"><td className="py-3 pr-3">{t(lang, 'total')}</td><td className="px-3 py-3">{normalizeMonthly ? `${financials.totalMonthly.toFixed(2)} € / ${t(lang, 'perMonthShort')}` : '—'}</td><td className="px-3 py-3">{financials.totalTerm.toFixed(2)} € / {t(lang, 'perTermShort')}</td><td className="px-3 py-3">{financials.totalMaterials.toFixed(2)} €</td></tr></tfoot>
+                <tfoot><tr className="border-t-2 border-slate-200 font-black dark:border-slate-700"><td className="py-2 pr-3">{t(lang, 'total')}</td><td className="px-3 py-2">{normalizeMonthly ? `${financials.totalMonthly.toFixed(2)} € / ${t(lang, 'perMonthShort')}` : '—'}</td><td className="px-3 py-2">{financials.totalTerm.toFixed(2)} € / {t(lang, 'perTermShort')}</td><td className="px-3 py-2">{financials.totalMaterials.toFixed(2)} €</td></tr></tfoot>
               </table>
             </div>
           )}
-          <p className="mt-3 text-xs leading-5 text-slate-500">{t(lang, 'note')}</p>
+          <p className="mt-2 text-[11px] leading-4 text-slate-500">{t(lang, 'note')}</p>
         </section>
 
-        <section className="mt-5 rounded-2xl bg-slate-100 px-4 py-3 text-xs leading-5 text-slate-600 dark:bg-slate-900 dark:text-slate-400">
+        <section className="mt-3 rounded-xl bg-slate-100 px-3 py-2 text-[11px] leading-4 text-slate-600 dark:bg-slate-900 dark:text-slate-400">
           <b>{t(lang, 'legendGrades')}</b> {t(lang, 'legendText')}
         </section>
       </main>
@@ -1064,10 +1064,10 @@ type Kid = {
   });
 
   return (
-    <div className="min-w-0 bg-white p-4 dark:bg-slate-900 sm:p-5">
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <h4 className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
-          <span className={`h-2.5 w-2.5 rounded-full ${slot === 'Midday' ? 'bg-amber-400' : 'bg-violet-500'}`} />
+    <div className="min-w-0 bg-white p-3 dark:bg-slate-900">
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <h4 className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-slate-700 dark:text-slate-200">
+          <span className={`h-2 w-2 rounded-full ${slot === 'Midday' ? 'bg-amber-400' : 'bg-violet-500'}`} />
           {t(lang, slot === 'Midday' ? 'midday' : 'afternoon')}
         </h4>
         <a href={sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-emerald-700">
@@ -1075,9 +1075,9 @@ type Kid = {
         </a>
       </div>
       {sortedActivities.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-200 p-5 text-center text-xs text-slate-400 dark:border-slate-700">{t(lang, 'noActivities')}</div>
+        <div className="rounded-xl border border-dashed border-slate-200 p-4 text-center text-xs text-slate-400 dark:border-slate-700">{t(lang, 'noActivities')}</div>
       ) : (
-        <div className="space-y-3">
+        <div className="grid gap-2 xl:grid-cols-2">
           {sortedActivities.map(activity => <ActivityCard key={activity.id} activity={activity} plan={plan} onToggle={onToggle} lang={lang} />)}
         </div>
       )}
@@ -1118,44 +1118,44 @@ type Kid = {
     : activity.slot === "Midday" ? SOURCE_URLS.midday : SOURCE_URLS.afternoon;
 
   return (
-    <div className={`group relative rounded-2xl border bg-white p-4 transition hover:-translate-y-0.5 hover:shadow-md dark:bg-slate-900 ${open ? 'z-40' : 'z-0'} ${delta > 0 ? 'border-rose-200 dark:border-rose-900' : delta < 0 ? 'border-emerald-200 dark:border-emerald-900' : 'border-slate-200 dark:border-slate-700'}`}>
+    <div className={`group relative rounded-xl border bg-white p-3 transition hover:shadow-md dark:bg-slate-900 ${open ? 'z-40' : 'z-0'} ${delta > 0 ? 'border-rose-200 dark:border-rose-900' : delta < 0 ? 'border-emerald-200 dark:border-emerald-900' : 'border-slate-200 dark:border-slate-700'}`}>
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <div className="mb-2 flex flex-wrap gap-1.5">
-            {activity.status === 'new' && <span className="rounded-full bg-sky-100 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-sky-700 dark:bg-sky-950 dark:text-sky-300">{t(lang, 'newActivity')}</span>}
-            {activity.status === 'renamed' && <span className="rounded-full bg-violet-100 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-violet-700 dark:bg-violet-950 dark:text-violet-300">{t(lang, 'renamedActivity')}</span>}
-            {activity.status === 'service' && <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-600 dark:bg-slate-800 dark:text-slate-300">{t(lang, 'schoolService')}</span>}
+          <div className="mb-1 flex flex-wrap gap-1">
+            {activity.status === 'new' && <span className="rounded-full bg-sky-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-sky-700 dark:bg-sky-950 dark:text-sky-300">{t(lang, 'newActivity')}</span>}
+            {activity.status === 'renamed' && <span className="rounded-full bg-violet-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-violet-700 dark:bg-violet-950 dark:text-violet-300">{t(lang, 'renamedActivity')}</span>}
+            {activity.status === 'service' && <span className="rounded-full bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-slate-600 dark:bg-slate-800 dark:text-slate-300">{t(lang, 'schoolService')}</span>}
           </div>
-          <h5 className="font-black leading-5 tracking-tight text-slate-950 dark:text-white">{activityDisplayName(activity, lang)}</h5>
-          <div className="mt-2 flex flex-wrap gap-1.5 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
-            <span className="rounded-full bg-slate-100 px-2 py-1 dark:bg-slate-800">{activity.grades}</span>
-            <span className="rounded-full bg-slate-100 px-2 py-1 dark:bg-slate-800">{activity.time || (activity.slot === "Midday" ? t(lang, 'timeMiddaySlot') : t(lang, 'timeAfternoonSlot'))}</span>
+          <h5 className="text-sm font-black leading-4 tracking-tight text-slate-950 dark:text-white">{activityDisplayName(activity, lang)}</h5>
+          <div className="mt-1.5 flex flex-wrap gap-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
+            <span className="rounded-full bg-slate-100 px-1.5 py-0.5 dark:bg-slate-800">{activity.grades}</span>
+            <span className="rounded-full bg-slate-100 px-1.5 py-0.5 dark:bg-slate-800">{activity.time || (activity.slot === "Midday" ? t(lang, 'timeMiddaySlot') : t(lang, 'timeAfternoonSlot'))}</span>
           </div>
-          {activity.provider && <p className="mt-2 text-xs leading-5 text-slate-500">{activity.provider}{activity.location ? ` · ${activity.location}` : ""}</p>}
-          {notes && <p className="mt-1 text-xs leading-5 text-slate-500">{notes}</p>}
+          {activity.provider && <p className="mt-1 line-clamp-1 text-[11px] leading-4 text-slate-500">{activity.provider}{activity.location ? ` · ${activity.location}` : ""}</p>}
+          {notes && <p className="line-clamp-2 text-[10px] leading-4 text-slate-500">{notes}</p>}
         </div>
         <div className="shrink-0 text-right">
-          <div className="whitespace-nowrap text-lg font-black tracking-tight">{activity.price} €<span className="ml-1 text-[11px] font-medium text-slate-500">/{activity.period === "month" ? t(lang, 'perMonthShort') : t(lang, 'perTermShort')}</span></div>
+          <div className="whitespace-nowrap text-base font-black tracking-tight">{activity.price} €<span className="ml-0.5 text-[9px] font-medium text-slate-500">/{activity.period === "month" ? t(lang, 'perMonthShort') : t(lang, 'perTermShort')}</span></div>
           {delta !== 0 && (
-            <div className={`mt-1 inline-flex items-center gap-0.5 rounded-full px-2 py-1 text-[11px] font-black ${delta > 0 ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'}`} title={t(lang, 'previousPlannerPrice', { price: activity.previousPrice! })}>
+            <div className={`mt-1 inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-black ${delta > 0 ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'}`} title={t(lang, 'previousPlannerPrice', { price: activity.previousPrice! })}>
               {delta > 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
               {t(lang, delta > 0 ? 'priceUp' : 'priceDown', { delta: Math.abs(delta) })}
             </div>
           )}
           {activity.materialsFee && (
-            <div className="mt-1 max-w-28 text-[10px] leading-4 text-slate-500">{t(lang, 'plusMaterialsOnce', { fee: activity.materialsFee })}</div>
+            <div className="mt-0.5 max-w-24 text-[9px] leading-3 text-slate-500">{t(lang, 'plusMaterialsOnce', { fee: activity.materialsFee })}</div>
           )}
         </div>
       </div>
 
-      {delta !== 0 && <p className="mt-2 text-[11px] text-slate-500"><span className="line-through">{activity.previousPrice} €</span> · {t(lang, 'changesCompared')}</p>}
+      {delta !== 0 && <p className="mt-1 text-[9px] text-slate-500"><span className="line-through">{activity.previousPrice} €</span> · {t(lang, 'changesCompared')}</p>}
 
-      <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
+      <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-slate-100 pt-2 dark:border-slate-800">
         {assigned.length === 0 && (
           <span className="text-xs text-slate-400">{t(lang, 'noKidsAssigned')}</span>
         )}
         {assigned.map(kid => (
-          <span key={kid.id} className="inline-flex min-h-8 items-center gap-1.5 rounded-full border bg-white px-2.5 text-xs dark:bg-slate-900" style={{ borderColor: kid.color }}>
+          <span key={kid.id} className="inline-flex min-h-7 items-center gap-1 rounded-full border bg-white px-2 text-[11px] dark:bg-slate-900" style={{ borderColor: kid.color }}>
             <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: kid.color }} />
             {kid.name}
             <button
@@ -1171,7 +1171,7 @@ type Kid = {
 
         <div className="no-print relative">
           <button
-            className="inline-flex min-h-8 items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-3 text-xs font-bold text-slate-700 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+            className="inline-flex min-h-7 items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2.5 text-[11px] font-bold text-slate-700 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800 disabled:cursor-not-allowed disabled:opacity-40 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
             onClick={() => setOpen(v => !v)}
             disabled={plan.kids.length === 0}
             title={plan.kids.length === 0 ? t(lang, 'addKidsFirst') : t(lang, 'assignKidTitle')}
@@ -1181,13 +1181,13 @@ type Kid = {
             {t(lang, 'assignKid')}
           </button>
           {open && (
-            <div ref={menuRef} className="absolute left-0 z-20 mt-1 w-48 rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl dark:border-slate-700 dark:bg-slate-900">
+            <div ref={menuRef} className="absolute left-0 z-20 mt-1 w-44 rounded-lg border border-slate-200 bg-white p-1 shadow-xl dark:border-slate-700 dark:bg-slate-900">
               {unassigned.length === 0 ? (
-                <div className="px-2 py-2 text-xs text-slate-500">{t(lang, 'allKidsAssigned')}</div>
+                <div className="px-2 py-1.5 text-[11px] text-slate-500">{t(lang, 'allKidsAssigned')}</div>
               ) : (
               unassigned.map(kid => {
                 const eligible = isKidEligibleFor(activity, kid);
-                const base = "w-full text-left px-2.5 py-2 rounded-lg text-xs flex items-center gap-2";
+                const base = "w-full text-left px-2 py-1.5 rounded-md text-[11px] flex items-center gap-1.5";
                 const cls = eligible
                   ? base + " hover:bg-emerald-50 dark:hover:bg-slate-800"
                   : base + " opacity-60 cursor-not-allowed";
